@@ -265,6 +265,26 @@ static void on_list_selection_changed(GtkListBox *box, gpointer user_data) {
 }*/
 
 int main(int argc, char *argv[]) {
+    if (argc > 1 && strcmp(argv[1], "--uninstall") == 0) {
+    const char *exec_path = g_getenv("HOME");
+    if (!exec_path) exec_path = "~";
+
+    char bin_path[512], icon_path[512], desktop_path[512];
+
+    snprintf(bin_path, sizeof(bin_path), "%s/.local/bin/basteh", exec_path);
+    snprintf(icon_path, sizeof(icon_path), "%s/.local/icons/basteh.png", exec_path);
+    snprintf(desktop_path, sizeof(desktop_path), "%s/Desktop/Basteh.desktop", exec_path);
+
+    printf("Uninstalling Basteh...\n");
+    unlink(bin_path);
+    unlink(icon_path);
+    unlink(desktop_path);
+    printf("Uninstallation complete.\n");
+    printf("Goodbye :)");
+
+    return 0;
+    }
+
     gtk_init(&argc, &argv);
     AppWidgets *a = g_new0(AppWidgets, 1);
 
@@ -332,3 +352,4 @@ int main(int argc, char *argv[]) {
     g_free(a);
     return 0;
 }
+
