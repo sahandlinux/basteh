@@ -1,12 +1,12 @@
 # Maintainer: Aydin Rahbaran <codewizaard@proton.me>
 pkgname=basteh
-pkgver=1.0
+pkgver=0.0.2
 pkgrel=1
 pkgdesc="GTK GUI frontend for pacman"
 arch=('x86_64')
 url="https://github.com/sahandlinux/basteh"
 license=('GPL3')
-depends=('gtk3' 'pacman' 'pkexec')
+depends=('gtk3' 'pacman' 'polkit')
 makedepends=('gcc' 'git')
 source=("$pkgname::git+https://github.com/sahandlinux/basteh.git")
 sha256sums=('SKIP')
@@ -26,7 +26,7 @@ package() {
   # Desktop Entry
   install -Dm644 /dev/stdin "$pkgdir/usr/share/applications/basteh.desktop" <<EOF
 [Desktop Entry]
-Version=1.0
+Version=0.0.2
 Name=Basteh
 Exec=$pkgdir/usr/bin/basteh
 Icon=$srcdir/$pkgname/icons/basteh_minimal.jpg

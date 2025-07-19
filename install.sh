@@ -38,7 +38,7 @@ echo "🖥️ Creating .desktop launcher..."
 mkdir -p "$DESKTOP_PATH"
 cat > "$DESKTOP_PATH/basteh.desktop" <<EOF
 [Desktop Entry]
-Version=1.0
+Version=0.0.2
 Name=Basteh
 Exec=$BIN_PATH/basteh
 Icon=$ICON_PATH/basteh_minimal.jpg
