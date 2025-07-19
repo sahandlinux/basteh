@@ -1,4 +1,4 @@
-# Maintainer: sahandlinux <your-email@example.com>
+# Maintainer: Aydin Rahbaran <codewizaard@proton.me>
 pkgname=basteh
 pkgver=1.0
 pkgrel=1
@@ -7,13 +7,31 @@ arch=('x86_64')
 url="https://github.com/sahandlinux/basteh"
 license=('GPL3')
 depends=('gtk3' 'pacman' 'pkexec')
-makedepends=('gcc')
-source=("install.sh")
+makedepends=('gcc' 'git')
+source=("$pkgname::git+https://github.com/sahandlinux/basteh.git")
 sha256sums=('SKIP')
 
+build() {
+  cd "$srcdir/$pkgname/Basteh"
+  gcc main.c -o basteh `pkg-config --cflags --libs gtk+-3.0`
+}
+
 package() {
-  install -Dm755 "$srcdir/install.sh" "$pkgdir/usr/bin/basteh-install"
-  cd "$pkgdir/usr/bin"
-  chmod +x basteh-install
-  ./basteh-install
+  # Binary
+  install -Dm755 "$srcdir/$pkgname/Basteh/basteh" "$pkgdir/usr/bin/basteh"
+
+  # Icon
+  install -Dm644 "$srcdir/$pkgname/icons/basteh_minimal.jpg" "$pkgdir/usr/share/icons/hicolor/128x128/apps/basteh.png"
+
+  # Desktop Entry
+  install -Dm644 /dev/stdin "$pkgdir/usr/share/applications/basteh.desktop" <<EOF
+[Desktop Entry]
+Version=1.0
+Name=Basteh
+Exec=$pkgdir/usr/bin/basteh
+Icon=$srcdir/$pkgname/icons/basteh_minimal.jpg
+Terminal=false
+Type=Application
+Categories=System;Utility;
+EOF
 }
