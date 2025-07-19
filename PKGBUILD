@@ -2,11 +2,11 @@
 pkgname=basteh
 pkgver=0.0.2
 pkgrel=1
-pkgdesc="GTK GUI frontend for pacman"
+pkgdesc="GTK GUI frontend for apt package manager"
 arch=('x86_64')
 url="https://github.com/sahandlinux/basteh"
 license=('GPL3')
-depends=('gtk3' 'pacman' 'polkit')
+depends=('gtk3' 'apt' 'polkit')
 makedepends=('gcc' 'git')
 source=("$pkgname::git+https://github.com/sahandlinux/basteh.git")
 sha256sums=('SKIP')
