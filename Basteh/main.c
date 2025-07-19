@@ -39,26 +39,6 @@ static gchar *run_cmd(const gchar *cmd) {
     return g_string_free(result, FALSE);
 }
 
-static char *run_command_output(const char *cmd) {
-    FILE *fp = popen(cmd, "r");
-    if (!fp) return NULL;
-
-    char *output = NULL;
-    size_t size = 0;
-    char buffer[256];
-    while (fgets(buffer, sizeof(buffer), fp)) {
-        size_t len = strlen(buffer);
-        output = realloc(output, size + len + 1);
-        memcpy(output + size, buffer, len);
-        size += len;
-    }
-    if (output) output[size] = '\0';
-
-    pclose(fp);
-    return output;
-}
-
-// Callback for "Upgrade System"
 static void on_upgrade_system_clicked(GtkButton *btn, gpointer user_data) {
     AppWidgets *a = user_data;
     GtkWidget *dialog = gtk_message_dialog_new(GTK_WINDOW(a->window),
