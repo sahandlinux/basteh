@@ -16,10 +16,14 @@ ICON_URL="https://raw.githubusercontent.com/sahandlinux/basteh/main/icons/basteh
 MAIN_C="$INSTALL_DIR/main.c"
 BINARY="$INSTALL_DIR/basteh"
 
+echo "Installing dependencies..."
+apt install gcc
+apt install cmake
+
 echo "Creating install directory: $INSTALL_DIR"
 mkdir -p "$INSTALL_DIR"
 
-echo "Downloading main.c from GitHub..."
+echo "Downloading source code from GitHub..."
 curl -sL "$SOURCE_URL" -o "$MAIN_C"
 
 echo "Compiling Basteh..."
