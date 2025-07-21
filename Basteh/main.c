@@ -40,6 +40,12 @@ static gchar *run_cmd(const gchar *cmd) {
     return g_string_free(result, FALSE);
 }
 
+static void clear_listbox(GtkListBox *listbox) {
+    GList *children = gtk_container_get_children(GTK_CONTAINER(listbox));
+    for (GList *iter = children; iter != NULL; iter = iter->next)
+        gtk_widget_destroy(GTK_WIDGET(iter->data));
+    g_list_free(children);
+}
 
 static void on_upgrade_system_clicked(GtkButton *btn, gpointer user_data) {
     AppWidgets *a = user_data;
@@ -93,12 +99,7 @@ static void on_check_updates_clicked(GtkButton *btn, gpointer user_data) {
 }
 
 
-static void clear_listbox(GtkListBox *listbox) {
-    GList *children = gtk_container_get_children(GTK_CONTAINER(listbox));
-    for (GList *iter = children; iter != NULL; iter = iter->next)
-        gtk_widget_destroy(GTK_WIDGET(iter->data));
-    g_list_free(children);
-}
+
 
 
 static void list_installed_packages(AppWidgets *a) {
